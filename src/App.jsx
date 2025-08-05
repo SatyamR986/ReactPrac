@@ -1,12 +1,17 @@
-import WeatherContainer from './components/WeatherContainer';
+import WeatherUI from './components/WeatherUI';
+import { WeatherProvider } from './components/WeatherContext';
+import bgImg from './assets/bg-img.jpg';
+
 
 function App() {
   return (
-    <div className="min-h-screen w-full bg-[url('./assets/bg-img.jpg')] bg-cover bg-center p-4">
-      <div className="bg-transparent bg-opacity-40 p-1 rounded shadow-md max-w-2xl mx-auto w-full">
-        <WeatherContainer />
+    <WeatherProvider>
+      <div className="min-h-screen w-full bg-cover bg-center bg-no-repeat text-white flex items-center justify-center " style={{ backgroundImage: `url(${bgImg})` }}>
+        <div className='border-2 p-10 rounded-lg'>
+           <WeatherUI />
+        </div>
       </div>
-    </div>
+    </WeatherProvider>
   );
 }
 

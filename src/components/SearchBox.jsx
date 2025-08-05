@@ -1,36 +1,46 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import '../index.css';
 
-function SearchBox({onSearch}){
-    const [input, setInput] = useState('');
+function SearchBox({ onLiveSearch, onCommitSearch }) {
+  const [input, setInput] = useState('');
 
-    // handlesubmit function , event triggered -> prevent default reload , check if input trim and set input
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (input.trim()) {
-            onSearch(input.trim());
-            setInput('');
-        }
-    };
+  // Debounced live search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (input.trim()) {
+        onLiveSearch(input.trim());
+      } else {
+        onLiveSearch(null); // Clear live preview
+      }
+    }, 500);
 
-    return(
+    return () => clearTimeout(timer);
+  }, [input, onLiveSearch]);
 
-     // form runs handlesubmit when submitted 
-    <form onSubmit={handleSubmit} className="flex gap-2 items-center mb-4">
-        <input
+  const handleSearch = () => {
+    if (input.trim()) {
+      onCommitSearch(input.trim());
+    }
+  };
+
+  return (
+    <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 items-center mb-4">
+      <input
         type="text"
-        value={input}   
-        className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-gray-300"
-        onChange={(e) => setInput(e.target.value)} // takes latest input as e.target.value and stores it in state.
-        placeholder="Enter City name ..."
-        />
-            <button type="submit"
-                className="px-4 py-2 bg-transparent text-white rounded border-1 border-gray-300 hover:bg-gray-500 hover:text-black transition">
-                Search!
-                
-            </button>
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter City name..."
+        className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-white"
+      />
+      <button
+        type="button"
+        onClick={handleSearch}
+        className="px-4 py-2 bg-gray-300 text-black border-1 rounded hover:bg-transparent hover:text-white"
+      >
+        Search!
+      </button>
     </form>
-    );
+  );
 }
 
 export default SearchBox;
