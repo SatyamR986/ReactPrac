@@ -1,15 +1,32 @@
+import { useSelector } from 'react-redux';   // import Redux hook
 import WeatherUI from './components/WeatherUI';
 import { WeatherProvider } from './components/WeatherContext';
-import bgImg from './assets/bg-img.jpg';
-
+import bgImgLight from './assets/bg-img.jpg'
+import bgImgDark from './assets/bg-img2.jpg'
+import ThemeChange from './components/ThemeChange';
 
 function App() {
+  const mode = useSelector(state => state.theme.mode);  // get theme mode from Redux
+
   return (
     <WeatherProvider>
-      <div className="min-h-screen w-full bg-cover bg-center bg-no-repeat text-white flex items-center justify-center " style={{ backgroundImage: `url(${bgImg})` }}>
-        <div className='border-2 p-10 rounded-lg'>
-           <WeatherUI />
+      <div
+        className={`
+          w-full flex items-center transition-colors bgduration-300 justify-center 
+          ${mode === 'dark' ? 'bg-gray-800 text-white' : 'text-black'}
+          `}
+        style={{
+          backgroundImage: `url(${mode === 'dark' ? bgImgDark : bgImgLight})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}>
+        <div>
+          <ThemeChange />
+          <div className='flex'>
+            <WeatherUI />
+          </div>
         </div>
+
       </div>
     </WeatherProvider>
   );

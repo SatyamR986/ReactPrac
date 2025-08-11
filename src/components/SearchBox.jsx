@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import '../index.css';
+import { useSelector } from 'react-redux';
+import searchW from '../assets/search2.png'
+import searchB from '../assets/search1.png'
+
 
 function SearchBox({ onLiveSearch, onCommitSearch }) {
+  const mode = useSelector(state => state.theme.mode);
   const [input, setInput] = useState('');
 
   // Debounced live search
@@ -24,20 +29,26 @@ function SearchBox({ onLiveSearch, onCommitSearch }) {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 items-center mb-4">
+    <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex gap-2 justify-center items-center mb-4">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Enter City name..."
-        className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-white"
+        className={`p-2 rounded border border-black focus:outline-none focus:ring-2 focus:ring-black-400 text-black
+           ${mode === 'dark' ? 'border-white text-white' : 'text-black'}`}
       />
       <button
         type="button"
         onClick={handleSearch}
-        className="px-4 py-2 bg-gray-300 text-black border-1 rounded hover:bg-transparent hover:text-white"
+        className={`px-4 py-2  text-black border-1 rounded hover:bg-transparent hover:scale-110 shadow-lg
+          ${mode === 'dark' ? 'border-white text-white' : 'text-black'}`}
       >
-        Search!
+        <img
+          src={mode === 'dark' ? searchW : searchB}
+          alt="Search icon"
+          className="w-5 h-5"
+        />
       </button>
     </form>
   );
