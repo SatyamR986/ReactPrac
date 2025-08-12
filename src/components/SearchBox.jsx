@@ -5,6 +5,7 @@ import searchW from '../assets/search2.png'
 import searchB from '../assets/search1.png'
 
 
+
 function SearchBox({ onLiveSearch, onCommitSearch }) {
   const mode = useSelector(state => state.theme.mode);
   const [input, setInput] = useState('');
@@ -29,19 +30,19 @@ function SearchBox({ onLiveSearch, onCommitSearch }) {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex gap-2 justify-center items-center mb-4">
+    <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex gap-2 justify-center items-center mb-4 ">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Enter City name..."
-        className={`p-2 rounded border border-black focus:outline-none focus:ring-2 focus:ring-black-400 text-black
+        className={`p-2 rounded border border-black focus:outline-none focus:ring-2 focus:ring-black-400 text-black transition-transform duration-200 hover:scale-105
            ${mode === 'dark' ? 'border-white text-white' : 'text-black'}`}
       />
       <button
         type="button"
         onClick={handleSearch}
-        className={`px-4 py-2  text-black border-1 rounded hover:bg-transparent hover:scale-110 shadow-lg
+        className={`px-4 py-2  text-black border-1 rounded hover:bg-transparent shadow-lg transition-transform duration-200 hover:scale-105
           ${mode === 'dark' ? 'border-white text-white' : 'text-black'}`}
       >
         <img

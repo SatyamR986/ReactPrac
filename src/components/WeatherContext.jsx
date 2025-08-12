@@ -18,6 +18,7 @@ export function WeatherProvider({ children }) {
           `https://api.openweathermap.org/data/2.5/weather?q=${cityToFetch}&appid=${apiKey}&units=metric`
         );
         const data = await res.json();
+        console.log(data);
         setWeather(data);
       } catch (err) {
         console.error("Weather fetch failed:", err);

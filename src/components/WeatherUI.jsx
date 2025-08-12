@@ -12,7 +12,7 @@ function WeatherUI() {
       <div className={`flex flex-row items-center justify-center p-6 rounded-lg shadow-lg
       ${mode === 'dark' ? 'text-white' : 'text-black'}`}
       >
-        <h1 className="text-xl font-bold mb-4">Weather App</h1>
+        <h1 className="text-xl font-bold mb-4 transition-transform duration-200 hover:scale-105">Weather App</h1>
       </div>
       <div className=''>
         <SearchBox
