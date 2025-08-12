@@ -42,10 +42,10 @@ function DateTime({ timezoneOffset }) {
 
     return (
         <div>
-            <h2 className="absolute top-3 left-3 font-serif text-2xl font-bold drop-shadow-md">
+            <h2 className="absolute top-3 left-3 font-serif text-2xl font-bold drop-shadow-md transition-transform duration-200 hover:scale-105">
                 Date: {formattedDate}
             </h2>
-            <h2 className="absolute top-14 left-3 font-serif text-2xl font-bold drop-shadow-md ">
+            <h2 className="absolute top-14 left-3 font-serif text-2xl font-bold drop-shadow-md transition-transform duration-200 hover:scale-105">
                 Time: {formattedTime}
             </h2>
 
